@@ -1,6 +1,0 @@
-
-# NUXT
-
-https://nuxtjs.org/
-
-
