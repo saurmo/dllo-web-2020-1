@@ -39,9 +39,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" class="text-none" @click="iniciar"
-            >Ingresar</v-btn
-          >
+          <v-btn color="primary" class="text-none" @click="iniciar">Ingresar</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -57,7 +55,7 @@ export default {
     return {
       usuario: {},
       mensaje: null,
-      reglas: [(v) => !!v || "El campo es obligatorio."],
+      reglas: [v => !!v || "El campo es obligatorio."]
     };
   },
   methods: {
@@ -69,17 +67,17 @@ export default {
 
         this.$axios
           .post(url, this.usuario)
-          .then((response) => {
+          .then(response => {
             let data = response.data;
             localStorage.setItem("token", data.info);
-            this.$cookies.set("userid", usuario.documento);
+            this.$cookies.set("userid", this.usuario.documento);
             let userid = this.$cookies.get("userid");
             console.log("USERID COOKIE", userid);
             //Enviar al usuario a la página del home
             this.$axios.setHeader("token", data.info);
             this.$router.push("/home");
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error.response);
             if (error.response && error.response.data) {
               this.mensaje = "Error:" + error.response.data.mensaje;
@@ -90,7 +88,7 @@ export default {
       } else {
         this.mensaje = "El formulario está incompleto.";
       }
-    },
-  },
+    }
+  }
 };
 </script>
